@@ -10,7 +10,10 @@ services:
       - ./mount/etc/nginx:/etc/nginx
       - ./mount/etc/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
       - ./mount/etc/php.ini:/etc/php.ini
-      - ./mount/var/log/nginx:/var/log/nginx
+      - ./mount/etc/php-fpm.conf:/etc/php-fpm.conf
+      - ./mount/etc/php-fpm.d:/etc/php-fpm.d
+      - ./mount/var/log:/var/log
+      - ./mount/etc/phpMyAdmin:/etc/phpMyAdmin
     restart: always
     # depends_on:
     #   - mysql
@@ -47,7 +50,7 @@ services:
     network_mode: "service:php"
     # network_mode: host
 
-networks:
-  net_group:
+# networks:
+#   net_group:
 
 

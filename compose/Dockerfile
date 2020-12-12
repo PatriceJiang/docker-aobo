@@ -7,7 +7,7 @@ LABEL maintainer="397136899@qq.com"
 EXPOSE 80
 
 RUN yum -y update; yum clean all
-RUN yum -y install net-tools zip unzip gcc gcc-c++ python wget git yum-utils supervisor socat
+RUN yum -y install net-tools zip unzip gcc gcc-c++ python wget git yum-utils supervisor socat vim which
 
 RUN mkdir -p /install
 WORKDIR /install
@@ -23,27 +23,22 @@ RUN rpm -Uvh epel-release-latest-7.noarch.rpm
 RUN rpm -ivh erlang-19.0.4-1.el7.centos.x86_64.rpm
 RUN rpm -ivh rabbitmq-server-3.6.14-1.el7.noarch.rpm
 
-
+RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 RUN yum-config-manager --enable remi-php72
-RUN yum -y install php php-common php-opcache php-mcrypt php-cli php-curl php-redis php-memcached php-imagick php-fileinfo php-mysqlnd
-RUN yum -y install phpmyadmin
+RUN yum -y update
+RUN yum -y install php72 php72-php-common php72-php-opcache php72-php-mcrypt php72-php-cli php72-php-curl php72-php-redis php72-php-memcached php72-php-imagick php72-php-fileinfo php72-php-mysqlnd php72-php-fpm phpmyadmin
+RUN yum -y install nginx mysql telnet netcat php-fpm
+RUN yum -y install php72-php-xml php72-php-mbstring  php72-php-gd php72-php-zip
+RUN yum clean all
+ENV PATH="/opt/remi/php72/root/usr/bin:${PATH}"
 
-RUN yum -y install nginx
-
-RUN yum -y install mysql telnet netcat
-
-RUN php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" 
-RUN php composer-setup.php
+RUN php72 -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" 
+RUN php72 composer-setup.php
 RUN mv composer.phar /usr/local/bin/composer
-
-
 
 RUN tar xzf oneinstack-full.tar.gz 
 
-
-COPY mount/etc/rabbitmq/rabbitmq.config /etc/rabbitmq
-
-VOLUME ["/data", "/var/log/rabbitmq", "/sys/fs/cgroup"]
+VOLUME ["/data", "/etc/nginx", "/etc/rabbitmq/rabbitmq.config", "/var/log", "/etc/php.ini", "/etc/php-fpm.d", "/etc/phpMyAdmin"]
 
 STOPSIGNAL SIGTERM
 
