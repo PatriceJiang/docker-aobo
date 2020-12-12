@@ -3,6 +3,7 @@ compose/mount/redis
 compose/mount/data/wwwlogs
 compose/packages/*.rpm
 compose/packages/*.gz
+compose/mount/var/log/nginx
 
 **/.DS_Store
 

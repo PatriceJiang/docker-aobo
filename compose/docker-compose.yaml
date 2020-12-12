@@ -3,7 +3,8 @@ services:
   php:
     image: pt/aobo
     ports:
-      - "82"
+      - "80:82"
+      - "8080:8080"
     volumes:
       - ./mount/data:/data
       - ./mount/etc/nginx:/etc/nginx
@@ -11,13 +12,13 @@ services:
       - ./mount/etc/php.ini:/etc/php.ini
       - ./mount/var/log/nginx:/var/log/nginx
     restart: always
-    depends_on:
-      - mysql
-      - redis
-      - memcached
-    network_mode: host
+    # depends_on:
+    #   - mysql
+    #   - redis
+    #   - memcached
+    # network_mode: host
     # networks:
-    #   - net_group
+      # - net_group
   mysql:
     image: mysql:5.7
     command: 
@@ -29,9 +30,8 @@ services:
       - ./mount/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: Geinshow2019
-    network_mode: host
-    # networks:
-    #   - net_group
+    # network_mode: host
+    network_mode: "service:php"
   redis:
     image: "redis:alpine"
     restart: always
@@ -39,17 +39,15 @@ services:
       - --appendonly yes
     volumes:
       - ./mount/redis:/data
-    network_mode: host
-    # networks:
-    #   - net_group
+    # network_mode: host
+    network_mode: "service:php"
   memcached:
     image: "memcached:alpine"
     restart: always
-    # networks:
-    #   - net_group
-    network_mode: host
+    network_mode: "service:php"
+    # network_mode: host
 
-# networks:
-#   net_group:
+networks:
+  net_group:
 
 
