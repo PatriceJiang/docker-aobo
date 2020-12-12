@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  php:
+    image: pt/aobo
+    ports:
+      - 80:80
+    volumes:
+      - ./mount/data:/data
+      - ./mount/etc/nginx:/etc/nginx
+      - ./mount/etc/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+      - ./mount/etc/php.ini:/etc/php.ini
+    restart: always
+    depends_on:
+      - mysql
+      - redis
+      - memcached
+    network_mode: host
+    # networks:
+    #   - net_group
+  mysql:
+    image: mysql:5.7
+    command: 
+      - --default-authentication-plugin=mysql_native_password 
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    restart: always
+    volumes:
+      - ./mount/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Geinshow2019
+    network_mode: host
+    # networks:
+    #   - net_group
+  redis:
+    image: "redis:alpine"
+    restart: always
+    command:
+      - --appendonly yes
+    volumes:
+      - ./mount/redis:/data
+    network_mode: host
+    # networks:
+    #   - net_group
+  memcached:
+    image: "memcached:alpine"
+    restart: always
+    # networks:
+    #   - net_group
+    network_mode: host
+
+networks:
+  net_group:
+
+

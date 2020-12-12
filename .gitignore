@@ -1,0 +1,7 @@
+compose/mount/mysql
+compose/mount/redis
+compose/mount/data/wwwlogs
+compose/packages/*.rpm
+compose/packages/*.gz
+
+**/.DS_Store
