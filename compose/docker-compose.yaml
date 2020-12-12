@@ -3,12 +3,13 @@ services:
   php:
     image: pt/aobo
     ports:
-      - 80:80
+      - "82"
     volumes:
       - ./mount/data:/data
       - ./mount/etc/nginx:/etc/nginx
       - ./mount/etc/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
       - ./mount/etc/php.ini:/etc/php.ini
+      - ./mount/var/log/nginx:/var/log/nginx
     restart: always
     depends_on:
       - mysql
@@ -48,7 +49,7 @@ services:
     #   - net_group
     network_mode: host
 
-networks:
-  net_group:
+# networks:
+#   net_group:
 
 

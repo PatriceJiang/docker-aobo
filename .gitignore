@@ -5,3 +5,5 @@ compose/packages/*.rpm
 compose/packages/*.gz
 
 **/.DS_Store
+
+*.pdf
