@@ -29,8 +29,10 @@ RUN yum -y update
 RUN yum -y install php72 php72-php-common php72-php-opcache php72-php-mcrypt php72-php-cli php72-php-curl php72-php-redis php72-php-memcached php72-php-imagick php72-php-fileinfo php72-php-mysqlnd php72-php-fpm phpmyadmin
 RUN yum -y install nginx mysql telnet netcat php-fpm
 RUN yum -y install php72-php-xml php72-php-mbstring  php72-php-gd php72-php-zip
+RUN yum -y install crontabs cronie
 RUN yum clean all
 ENV PATH="/opt/remi/php72/root/usr/bin:${PATH}"
+RUN echo "* * * * * . /etc/profile;/opt/remi/php72/root/usr/bin/php /data/wwwroot/outbook/artisan schedule:run >> /dev/null 2>&1" >> /etc/crontab
 
 RUN php72 -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" 
 RUN php72 composer-setup.php
@@ -41,6 +43,8 @@ RUN tar xzf oneinstack-full.tar.gz
 VOLUME ["/data", "/etc/nginx", "/etc/rabbitmq/rabbitmq.config", "/var/log", "/etc/php.ini", "/etc/php-fpm.d", "/etc/phpMyAdmin"]
 
 STOPSIGNAL SIGTERM
+
+WORKDIR /data/wwwroot
 
 HEALTHCHECK --interval=5m --timeout=3s \
      CMD curl -f http://localhost/ || exit 1

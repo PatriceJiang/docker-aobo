@@ -4,6 +4,7 @@ compose/mount/data/wwwlogs
 compose/packages/*.rpm
 compose/packages/*.gz
 compose/mount/var/log/nginx
+compose/mount/var/log/*
 
 **/.DS_Store
 

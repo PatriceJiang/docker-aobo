@@ -4,7 +4,8 @@ services:
     image: pt/aobo
     ports:
       - "80:82"
-      - "8080:8080"
+      - "9090:8080"
+      - "8080:80"
     volumes:
       - ./mount/data:/data
       - ./mount/etc/nginx:/etc/nginx
@@ -20,8 +21,27 @@ services:
     #   - redis
     #   - memcached
     # network_mode: host
+    networks:
+      - net_group
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+  phpmyadmin:
+    image: phpmyadmin:5-apache
+    restart: always
+    environment: 
+      - PMA_HOST=127.0.0.1
+      - PMA_PORT=3306
+      - PMA_VERBOSE=TRUE
+      - PMA_USER=root
+      - PMA_PASSWORD=Geinshow2019
+    # ports:
+    #   - "8080:80"
     # networks:
-      # - net_group
+    #   - net_group
+    network_mode: "service:php"
+
   mysql:
     image: mysql:5.7
     command: 
@@ -33,6 +53,9 @@ services:
       - ./mount/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: Geinshow2019
+      MYSQL_DATABASE: outbook
+      MYSQL_USER: outbook
+      MYSQL_PASSWORD: secret
     # network_mode: host
     network_mode: "service:php"
   redis:
@@ -50,7 +73,7 @@ services:
     network_mode: "service:php"
     # network_mode: host
 
-# networks:
-#   net_group:
+networks:
+  net_group:
 
 
