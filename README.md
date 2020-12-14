@@ -75,7 +75,7 @@ sh boot.sh
 **需要按照现有的施工文档执行初始化流程:**
 
 
-a. 拷贝代码到 /data/wwwroot/outbook 目录()
+a. 拷贝项目代码到 mount/data/wwwroot/outbook
 
 b. 先查看当前 docker 实例的 ID
 
@@ -102,6 +102,8 @@ DB_CONNECTION=mysql
 REDIS_HOST=redis
 ```
 
+> 也可以在宿主机上直接编辑 `mount/data/wwwroot/outbook/.env`
+
 e. 执行相关过程
 
 ```bash
@@ -126,6 +128,8 @@ docker-compose restart
  
 - 主服务 http://localhost:80 
 - phpMyAdmin http://localhost:8080
+
+![run](./images/run.png)
 
 ### 配置 nginx
 
