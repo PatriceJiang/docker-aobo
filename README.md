@@ -64,7 +64,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```bash
 sh build.sh
 ```
-
+> 执行时间较长, 取决于网络
 ### 3. 启动 docker
 ```
 sh boot.sh
@@ -72,24 +72,26 @@ sh boot.sh
 
 ![docker-compose up](./images/up.png)
 
-启动 docker 需要对服务器进行初始化, 按照现有的施工文档执行初始化流程:
+**需要按照现有的施工文档执行初始化流程:**
 
-a. 查看当前 docker 实例的 ID
+
+a. 拷贝代码到 /data/wwwroot/outbook 目录()
+
+b. 先查看当前 docker 实例的 ID
 
 ```bash
 docker ps
 ```
 ![docker ps](./images/ps.png)
 
-b. 登录
+c. 再登录 bash
 ```bash
 docker exec -it 3176941429e4 bash
 ```
 ![docker exec](./images/bash.png)
 
-c. 拷贝代码到 /data/wwwroot/outbook 目录
 
-c. 修改 .env 配置 
+d. 修改 .env 配置 
 
 其中
 
