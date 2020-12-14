@@ -1,10 +1,9 @@
 #!/bin/bash 
 
 set -x
+cd compose
+docker-compose up \
+    --no-recreate  \
+    --detach   
 
-docker run \
-    -d \
-    -p 80:80 \
-    -v mount/data:/data
-    pt/test1
     
