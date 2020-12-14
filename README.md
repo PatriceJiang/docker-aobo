@@ -2,6 +2,8 @@
 
 使用了 Docker 工具集, 需要部署人员先熟悉 `docker` 命令.
 
+docker-compose.yaml 说明 https://docs.docker.com/compose/compose-file/ 
+
 ## 目录说明
 
 此目录中的主要文件说明. 
@@ -96,7 +98,7 @@ d. 修改 .env 配置
 其中
 
 ```
-DB_CONNECTION=mysql
+DB_HOST=mysql
 ```
 ```
 REDIS_HOST=redis

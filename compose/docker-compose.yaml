@@ -12,7 +12,6 @@ services:
       - ./mount/etc/php-fpm.conf:/etc/php-fpm.conf
       - ./mount/etc/php-fpm.d:/etc/php-fpm.d
       - ./mount/var/log:/var/log
-      - ./mount/etc/phpMyAdmin:/etc/phpMyAdmin
     restart: always
     # depends_on:
     #   - mysql
@@ -50,6 +49,7 @@ services:
     restart: always
     volumes:
       - ./mount/mysql:/var/lib/mysql
+      - ./mount/etc/mysql/conf.d:/etc/mysql/conf.d
     environment:
       MYSQL_ROOT_PASSWORD: Geinshow2019
       MYSQL_DATABASE: outbook
