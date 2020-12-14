@@ -1,11 +1,15 @@
 compose/mount/mysql
 compose/mount/redis
 compose/mount/data/wwwlogs
+compose/mount/data/wwwroot
 compose/packages/*.rpm
 compose/packages/*.gz
+compose/packages/*.zip
 compose/mount/var/log/nginx
-compose/mount/var/log/*
-
+compose/mount/var/log/php-fpm
+compose/mount/var/log/rabbitmq
+compose/mount/var/log/*log
 **/.DS_Store
 
 *.pdf
+*.pid
